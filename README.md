@@ -1,6 +1,6 @@
 # The Nature of Code: Go + Ebitengine
 
-This repository contains ports of the original [p5.js](https://p5js.org/) sketches from [*The Nature of Code*](https://natureofcode.com/) book by [Daniel Shiffman](https://shiffman.net/), published by No Starch Press® Inc., licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+This repository contains ports of the [p5.js](https://p5js.org/) sketches from [*The Nature of Code*](https://natureofcode.com/) book by [Daniel Shiffman](https://shiffman.net/), published by No Starch Press® Inc., licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 This project is non-commercial and distributed under the same license.
 
