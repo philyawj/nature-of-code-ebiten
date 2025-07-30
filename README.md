@@ -17,3 +17,9 @@ Each example is in its own directory with a `main.go` file. To run an example, n
 ```sh
 go run .
 ```
+
+## No Additional Libraries
+
+To keep things simple, I've chosen to use only [Go](https://golang.org/) and [Ebitengine](https://github.com/hajimehoshi/ebiten) for these examples. Where necessary, I've written my own simplified ported versions of [p5.js](https://p5js.org/) math functions and separate physics library functions, rather than relying on additional third-party libraries.
+
+If you adapt these examples, feel free to modify the ported functions or substitute them with functions from another library.
