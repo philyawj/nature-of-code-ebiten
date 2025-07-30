@@ -8,11 +8,10 @@ package main
 
 import (
 	"image/color"
-	"math"
-	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/philyawj/nature-of-code-ebiten/p5math"
 )
 
 const (
@@ -33,7 +32,7 @@ func NewGame() *Game {
 }
 
 func (g *Game) Update() error {
-	x := float32(randomGaussian(mean, stddev))
+	x := float32(p5math.RandomGaussian(mean, stddev))
 	vector.DrawFilledCircle(g.trailImage, x, 120, 8, color.RGBA{0, 0, 0, 10}, true)
 	return nil
 }
@@ -44,13 +43,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
-}
-
-func randomGaussian(mean, stddev float64) float64 {
-	u1 := rand.Float64()
-	u2 := rand.Float64()
-	z0 := math.Sqrt(-2.0*math.Log(u1)) * math.Cos(2*math.Pi*u2)
-	return z0*stddev + mean
 }
 
 func main() {
