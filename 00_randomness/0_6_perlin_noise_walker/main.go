@@ -1,3 +1,9 @@
+// Copyright 2025 Jordan Philyaw
+//
+// Port of Example 0.6 from "The Nature of Code" by Daniel Shiffman,
+// published by No Starch Press® Inc., licensed under CC BY-NC-SA 4.0.
+// Rewritten in Go using the Ebitengine game engine.
+
 package main
 
 import (
