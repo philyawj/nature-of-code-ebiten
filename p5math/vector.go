@@ -11,7 +11,7 @@ func NewVector(x, y float32) *Vector {
 }
 
 // Add is a port of the p5.js `vector.add()` function.
-// It adds two vectors together and modifies the original vector.
+// It adds two Vectors together and modifies the original Vector.
 func (v *Vector) Add(v2 *Vector) {
 	v.X += v2.X
 	v.Y += v2.Y
