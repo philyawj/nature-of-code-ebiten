@@ -31,7 +31,7 @@ func NewWalker() *Walker {
 	}
 }
 
-func (w *Walker) Step() {
+func (w *Walker) step() {
 	w.x = p5math.MapRange(p5math.Noise(w.tx), 0, 1, 0, screenWidth)
 	w.y = p5math.MapRange(p5math.Noise(w.ty), 0, 1, 0, screenHeight)
 	w.tx += 0.01
@@ -53,7 +53,7 @@ func NewGame() *Game {
 }
 
 func (g *Game) Update() error {
-	g.walker.Step()
+	g.walker.step()
 	vector.DrawFilledCircle(g.trailImage, float32(g.walker.x), float32(g.walker.y), 24, color.RGBA{127, 127, 127, 255}, true)
 	vector.StrokeCircle(g.trailImage, float32(g.walker.x), float32(g.walker.y), 24, 2, color.Black, true)
 	return nil
