@@ -30,3 +30,10 @@ func (v *Vector) Sub(v2 *Vector) {
 	v.X -= v2.X
 	v.Y -= v2.Y
 }
+
+// Mult is a port of the p5.js `vector.mult()` function.
+// It multiplies the Vector by a scalar value and modifies the original Vector.
+func (v *Vector) Mult(n float32) {
+	v.X *= n
+	v.Y *= n
+}
