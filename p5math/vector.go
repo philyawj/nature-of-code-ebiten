@@ -5,6 +5,8 @@
 
 package p5math
 
+import "math"
+
 // Vector is a port of the p5.js `p5.Vector` class.
 // It represents a 2D vector with x and y coordinates.
 type Vector struct {
@@ -36,4 +38,10 @@ func (v *Vector) Sub(v2 *Vector) {
 func (v *Vector) Mult(n float32) {
 	v.X *= n
 	v.Y *= n
+}
+
+// Mag is a port of the p5.js `vector.mag()` function.
+// It returns the magnitude (length) of the Vector.
+func (v *Vector) Mag() float32 {
+	return float32(math.Sqrt(float64(v.X*v.X + v.Y*v.Y)))
 }
