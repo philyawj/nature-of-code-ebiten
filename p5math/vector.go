@@ -5,6 +5,8 @@
 
 package p5math
 
+// Vector is a port of the p5.js `p5.Vector` class.
+// It represents a 2D vector with x and y coordinates.
 type Vector struct {
 	X, Y float32
 }
@@ -20,4 +22,11 @@ func NewVector(x, y float32) *Vector {
 func (v *Vector) Add(v2 *Vector) {
 	v.X += v2.X
 	v.Y += v2.Y
+}
+
+// Sub is a port of the p5.js `vector.sub()` function.
+// It subtracts two Vectors and modifies the original Vector.
+func (v *Vector) Sub(v2 *Vector) {
+	v.X -= v2.X
+	v.Y -= v2.Y
 }
