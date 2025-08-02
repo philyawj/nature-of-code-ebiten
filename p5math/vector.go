@@ -40,8 +40,24 @@ func (v *Vector) Mult(n float32) {
 	v.Y *= n
 }
 
+// Div is a port of the p5.js `vector.div()` function.
+// It divides the Vector by a scalar value and modifies the original Vector.
+func (v *Vector) Div(n float32) {
+	v.X /= n
+	v.Y /= n
+}
+
 // Mag is a port of the p5.js `vector.mag()` function.
 // It returns the magnitude (length) of the Vector.
 func (v *Vector) Mag() float32 {
 	return float32(math.Sqrt(float64(v.X*v.X + v.Y*v.Y)))
+}
+
+// Normalize is a port of the p5.js `vector.normalize()` function.
+// It normalizes the Vector to a unit vector (length of 1) and modifies the original Vector.
+func (v *Vector) Normalize() {
+	m := v.Mag()
+	if m > 0 {
+		v.Div(m)
+	}
 }
