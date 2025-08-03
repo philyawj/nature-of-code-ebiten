@@ -18,12 +18,12 @@ const (
 	screenHeight = 240
 )
 
-type Game struct {
+type game struct {
 	x, y, xspeed, yspeed float32
 }
 
-func NewGame() *Game {
-	return &Game{
+func newGame() *game {
+	return &game{
 		x:      100,
 		y:      100,
 		xspeed: 2.5,
@@ -31,7 +31,7 @@ func NewGame() *Game {
 	}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	g.x += g.xspeed
 	g.y += g.yspeed
 
@@ -45,20 +45,20 @@ func (g *Game) Update() error {
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
 	vector.DrawFilledCircle(screen, float32(g.x), float32(g.y), 24, color.RGBA{127, 127, 127, 255}, true)
 	vector.StrokeCircle(screen, float32(g.x), float32(g.y), 24, 2, color.Black, true)
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Bouncing Ball with No Vectors")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }

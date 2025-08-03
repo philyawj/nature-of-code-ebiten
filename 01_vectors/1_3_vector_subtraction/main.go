@@ -20,17 +20,17 @@ const (
 	screenHeight = 240
 )
 
-type Game struct{}
+type game struct{}
 
-func NewGame() *Game {
-	return &Game{}
+func newGame() *game {
+	return &game{}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
 
 	mouseX, mouseY := ebiten.CursorPosition()
@@ -48,14 +48,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	vector.StrokeLine(screen, center.X, center.Y, center.X+mouse.X, center.Y+mouse.Y, 4, color.Black, true)
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Vector Subtraction")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }

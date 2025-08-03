@@ -21,34 +21,34 @@ const (
 	stddev       = 60
 )
 
-type Game struct {
+type game struct {
 	trailImage *ebiten.Image
 }
 
-func NewGame() *Game {
+func newGame() *game {
 	trailImage := ebiten.NewImage(screenWidth, screenHeight)
 	trailImage.Fill(color.White)
-	return &Game{trailImage: trailImage}
+	return &game{trailImage: trailImage}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	x := float32(p5math.RandomGaussian(mean, stddev))
 	vector.DrawFilledCircle(g.trailImage, x, 120, 8, color.RGBA{0, 0, 0, 10}, true)
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(g.trailImage, nil)
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("A Gaussian Distribution")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }

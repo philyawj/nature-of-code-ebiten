@@ -19,58 +19,58 @@ const (
 	screenHeight = 240
 )
 
-type Walker struct {
+type walker struct {
 	tx, ty float64
 	x, y   float64
 }
 
-func NewWalker() *Walker {
-	return &Walker{
+func newWalker() *walker {
+	return &walker{
 		tx: 0,
 		ty: 10000,
 	}
 }
 
-func (w *Walker) step() {
+func (w *walker) step() {
 	w.x = p5math.MapRange(p5math.Noise(w.tx), 0, 1, 0, screenWidth)
 	w.y = p5math.MapRange(p5math.Noise(w.ty), 0, 1, 0, screenHeight)
 	w.tx += 0.01
 	w.ty += 0.01
 }
 
-type Game struct {
-	walker     *Walker
+type game struct {
+	walker     *walker
 	trailImage *ebiten.Image
 }
 
-func NewGame() *Game {
+func newGame() *game {
 	trailImage := ebiten.NewImage(screenWidth, screenHeight)
 	trailImage.Fill(color.White)
-	return &Game{
-		walker:     NewWalker(),
+	return &game{
+		walker:     newWalker(),
 		trailImage: trailImage,
 	}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	g.walker.step()
 	vector.DrawFilledCircle(g.trailImage, float32(g.walker.x), float32(g.walker.y), 24, color.RGBA{127, 127, 127, 255}, true)
 	vector.StrokeCircle(g.trailImage, float32(g.walker.x), float32(g.walker.y), 24, 2, color.Black, true)
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(g.trailImage, nil)
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("Perlin Noise Walker")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }

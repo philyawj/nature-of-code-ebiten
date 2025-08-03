@@ -18,19 +18,19 @@ const (
 	screenHeight = 240
 )
 
-type Walker struct {
+type walker struct {
 	x int
 	y int
 }
 
-func NewWalker() *Walker {
-	return &Walker{
+func newWalker() *walker {
+	return &walker{
 		x: screenWidth / 2,
 		y: screenHeight / 2,
 	}
 }
 
-func (w *Walker) step() {
+func (w *walker) step() {
 	r := rand.Float64()
 	if r < 0.4 {
 		w.x++
@@ -55,38 +55,38 @@ func constrain(val, min, max int) int {
 	return val
 }
 
-type Game struct {
-	walker     *Walker
+type game struct {
+	walker     *walker
 	trailImage *ebiten.Image
 }
 
-func NewGame() *Game {
+func newGame() *game {
 	trailImage := ebiten.NewImage(screenWidth, screenHeight)
 	trailImage.Fill(color.White)
-	return &Game{
-		walker:     NewWalker(),
+	return &game{
+		walker:     newWalker(),
 		trailImage: trailImage,
 	}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	g.walker.step()
 	g.trailImage.Set(int(g.walker.x), int(g.walker.y), color.Black)
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(g.trailImage, nil)
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("A Walker That Tends to Move to the Right")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }

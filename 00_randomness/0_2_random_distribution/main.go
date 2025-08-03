@@ -20,21 +20,21 @@ const (
 	numBars      = 20
 )
 
-type Game struct {
+type game struct {
 	barCounts [numBars]int
 }
 
-func NewGame() *Game {
-	return &Game{}
+func newGame() *game {
+	return &game{}
 }
 
-func (g *Game) Update() error {
+func (g *game) Update() error {
 	index := rand.Intn(numBars)
 	g.barCounts[index]++
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
+func (g *game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
 
 	barWidth := float32(screenWidth) / float32(numBars)
@@ -50,14 +50,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return screenWidth, screenHeight
 }
 
 func main() {
 	ebiten.SetWindowSize(screenWidth, screenHeight)
 	ebiten.SetWindowTitle("A Random-Number Distribution")
-	if err := ebiten.RunGame(NewGame()); err != nil {
+	if err := ebiten.RunGame(newGame()); err != nil {
 		panic(err)
 	}
 }
