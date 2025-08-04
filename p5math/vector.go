@@ -5,7 +5,10 @@
 
 package p5math
 
-import "math"
+import (
+	"math"
+	"math/rand"
+)
 
 // Vector is a port of the p5.js `p5.Vector` class.
 // It represents a 2D vector with x and y coordinates.
@@ -54,7 +57,7 @@ func (v *Vector) Mag() float32 {
 }
 
 // Normalize is a port of the p5.js `vector.normalize()` function.
-// It normalizes the Vector to a unit vector (length of 1) and modifies the original Vector.
+// It normalizes the Vector to a unit Vector (length of 1) and modifies the original Vector.
 func (v *Vector) Normalize() {
 	m := v.Mag()
 	if m > 0 {
@@ -68,5 +71,15 @@ func (v *Vector) Limit(max float32) {
 	if v.Mag() > max {
 		v.Normalize()
 		v.Mult(max)
+	}
+}
+
+// Random2D is a port of the p5.js `p5.Vector.random2D()` function.
+// It returns a new unit Vector (length of 1) with a random direction.
+func Random2D() *Vector {
+	angle := rand.Float64() * 2 * math.Pi
+	return &Vector{
+		X: float32(math.Cos(angle)),
+		Y: float32(math.Sin(angle)),
 	}
 }
