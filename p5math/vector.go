@@ -61,3 +61,12 @@ func (v *Vector) Normalize() {
 		v.Div(m)
 	}
 }
+
+// Limit is a simplified port of the p5.js `vector.limit()` function.
+// It limits the magnitude of the Vector to a maximum value.
+func (v *Vector) Limit(max float32) {
+	if v.Mag() > max {
+		v.Normalize()
+		v.Mult(max)
+	}
+}
