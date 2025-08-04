@@ -83,3 +83,13 @@ func Random2D() *Vector {
 		Y: float32(math.Sin(angle)),
 	}
 }
+
+// SubVectors is a port of the p5.js `p5.Vector.sub()` function.
+// It returns a new Vector that is the result of subtracting v2 from v1.
+// This does not modify the original Vectors.
+func SubVectors(v1, v2 *Vector) *Vector {
+	return &Vector{
+		X: v1.X - v2.X,
+		Y: v1.Y - v2.Y,
+	}
+}
