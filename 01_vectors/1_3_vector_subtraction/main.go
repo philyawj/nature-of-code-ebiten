@@ -21,14 +21,14 @@ const (
 )
 
 type game struct {
-	mouse, center, sub *p5math.Vector
+	mouseVec, centerVec, subVec *p5math.Vector
 }
 
 func newGame() *game {
 	return &game{
-		mouse:  p5math.NewVector(0, 0),
-		center: p5math.NewVector(float32(screenWidth)/2, float32(screenHeight)/2),
-		sub:    p5math.NewVector(0, 0),
+		mouseVec:  p5math.NewVector(0, 0),
+		centerVec: p5math.NewVector(float32(screenWidth)/2, float32(screenHeight)/2),
+		subVec:    p5math.NewVector(0, 0),
 	}
 }
 
@@ -36,18 +36,18 @@ func (g *game) Update() error {
 	mouseX, mouseY := ebiten.CursorPosition()
 	boundedX := util.ConstrainToScreen(mouseX, screenWidth)
 	boundedY := util.ConstrainToScreen(mouseY, screenHeight)
-	g.mouse = p5math.NewVector(float32(boundedX), float32(boundedY))
+	g.mouseVec = p5math.NewVector(float32(boundedX), float32(boundedY))
 
-	g.sub = p5math.SubVectors(g.mouse, g.center)
+	g.subVec = p5math.SubVectors(g.mouseVec, g.centerVec)
 
 	return nil
 }
 
 func (g *game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
-	vector.StrokeLine(screen, 0, 0, g.mouse.X, g.mouse.Y, 4, color.RGBA{200, 200, 200, 255}, true)
-	vector.StrokeLine(screen, 0, 0, g.center.X, g.center.Y, 4, color.RGBA{200, 200, 200, 255}, true)
-	vector.StrokeLine(screen, g.center.X, g.center.Y, g.center.X+g.sub.X, g.center.Y+g.sub.Y, 4, color.Black, true)
+	vector.StrokeLine(screen, 0, 0, g.mouseVec.X, g.mouseVec.Y, 4, color.RGBA{200, 200, 200, 255}, true)
+	vector.StrokeLine(screen, 0, 0, g.centerVec.X, g.centerVec.Y, 4, color.RGBA{200, 200, 200, 255}, true)
+	vector.StrokeLine(screen, g.centerVec.X, g.centerVec.Y, g.centerVec.X+g.subVec.X, g.centerVec.Y+g.subVec.Y, 4, color.Black, true)
 }
 
 func (g *game) Layout(outsideWidth, outsideHeight int) (int, int) {
