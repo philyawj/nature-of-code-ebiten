@@ -11,6 +11,7 @@ import (
 	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/philyawj/nature-of-code-ebiten/util"
 )
 
 const (
@@ -41,18 +42,8 @@ func (w *walker) step() {
 	} else {
 		w.y--
 	}
-	w.x = constrain(w.x, 0, screenWidth-1)
-	w.y = constrain(w.y, 0, screenHeight-1)
-}
-
-func constrain(val, min, max int) int {
-	if val < min {
-		return min
-	}
-	if val > max {
-		return max
-	}
-	return val
+	w.x = util.ConstrainToScreen(w.x, screenWidth)
+	w.y = util.ConstrainToScreen(w.y, screenHeight)
 }
 
 type game struct {
