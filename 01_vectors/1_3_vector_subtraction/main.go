@@ -8,11 +8,11 @@ package main
 
 import (
 	"image/color"
-	"math"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/philyawj/nature-of-code-ebiten/p5math"
+	"github.com/philyawj/nature-of-code-ebiten/util"
 )
 
 const (
@@ -34,9 +34,9 @@ func (g *game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.White)
 
 	mouseX, mouseY := ebiten.CursorPosition()
-	clampedX := float32(math.Max(0, math.Min(float64(mouseX), float64(screenWidth-1))))
-	clampedY := float32(math.Max(0, math.Min(float64(mouseY), float64(screenHeight-1))))
-	mouse := p5math.NewVector(clampedX, clampedY)
+	boundedX := util.ConstrainToScreen(mouseX, screenWidth)
+	boundedY := util.ConstrainToScreen(mouseY, screenHeight)
+	mouse := p5math.NewVector(float32(boundedX), float32(boundedY))
 
 	center := p5math.NewVector(float32(screenWidth)/2, float32(screenHeight)/2)
 
