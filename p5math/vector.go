@@ -86,10 +86,20 @@ func Random2D() *Vector {
 
 // SubVectors is a port of the p5.js `p5.Vector.sub()` function.
 // It returns a new Vector that is the result of subtracting v2 from v1.
-// This does not modify the original Vectors.
+// This does not modify the original Vector.
 func SubVectors(v1, v2 *Vector) *Vector {
 	return &Vector{
 		X: v1.X - v2.X,
 		Y: v1.Y - v2.Y,
+	}
+}
+
+// MultVectors is a port of the p5.js `p5.Vector.mult()` function.
+// It returns a new Vector that is the result of multiplying v by n.
+// This does not modify the original Vector.
+func MultVectors(v *Vector, n float32) *Vector {
+	return &Vector{
+		X: v.X * n,
+		Y: v.Y * n,
 	}
 }
