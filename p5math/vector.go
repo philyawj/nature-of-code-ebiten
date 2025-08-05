@@ -103,3 +103,17 @@ func MultVectors(v *Vector, n float32) *Vector {
 		Y: v.Y * n,
 	}
 }
+
+// NormalizeVector is a port of the p5.js `p5.Vector.normalize()` function.
+// It returns a new unit Vector (length of 1) version of v.
+// This does not modify the original Vector.
+func NormalizeVector(v *Vector) *Vector {
+	m := v.Mag()
+	if m > 0 {
+		return &Vector{
+			X: v.X / m,
+			Y: v.Y / m,
+		}
+	}
+	return &Vector{X: 0, Y: 0}
+}
