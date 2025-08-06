@@ -36,6 +36,16 @@ func (v *Vector) Sub(v2 *Vector) {
 	v.Y -= v2.Y
 }
 
+// SubVectors is a port of the p5.js `p5.Vector.sub()` function.
+// It returns a new Vector that is the result of subtracting v2 from v1.
+// This does not modify the original Vector.
+func SubVectors(v1, v2 *Vector) *Vector {
+	return &Vector{
+		X: v1.X - v2.X,
+		Y: v1.Y - v2.Y,
+	}
+}
+
 // Mult is a port of the p5.js `vector.mult()` function.
 // It multiplies the Vector by a scalar value and modifies the original Vector.
 func (v *Vector) Mult(n float32) {
@@ -43,11 +53,31 @@ func (v *Vector) Mult(n float32) {
 	v.Y *= n
 }
 
+// MultVectors is a port of the p5.js `p5.Vector.mult()` function.
+// It returns a new Vector that is the result of multiplying v by n.
+// This does not modify the original Vector.
+func MultVectors(v *Vector, n float32) *Vector {
+	return &Vector{
+		X: v.X * n,
+		Y: v.Y * n,
+	}
+}
+
 // Div is a port of the p5.js `vector.div()` function.
 // It divides the Vector by a scalar value and modifies the original Vector.
 func (v *Vector) Div(n float32) {
 	v.X /= n
 	v.Y /= n
+}
+
+// DivVectors is a port of the p5.js `p5.Vector.div()` function.
+// It returns a new Vector that is the result of dividing v by n.
+// This does not modify the original Vector.
+func DivVectors(v *Vector, n float32) *Vector {
+	return &Vector{
+		X: v.X / n,
+		Y: v.Y / n,
+	}
 }
 
 // Mag is a port of the p5.js `vector.mag()` function.
@@ -63,6 +93,20 @@ func (v *Vector) Normalize() {
 	if m > 0 {
 		v.Div(m)
 	}
+}
+
+// NormalizeVector is a port of the p5.js `p5.Vector.normalize()` function.
+// It returns a new unit Vector (length of 1) version of v.
+// This does not modify the original Vector.
+func NormalizeVector(v *Vector) *Vector {
+	m := v.Mag()
+	if m > 0 {
+		return &Vector{
+			X: v.X / m,
+			Y: v.Y / m,
+		}
+	}
+	return &Vector{X: 0, Y: 0}
 }
 
 // Limit is a simplified port of the p5.js `vector.limit()` function.
@@ -82,38 +126,4 @@ func Random2D() *Vector {
 		X: float32(math.Cos(angle)),
 		Y: float32(math.Sin(angle)),
 	}
-}
-
-// SubVectors is a port of the p5.js `p5.Vector.sub()` function.
-// It returns a new Vector that is the result of subtracting v2 from v1.
-// This does not modify the original Vector.
-func SubVectors(v1, v2 *Vector) *Vector {
-	return &Vector{
-		X: v1.X - v2.X,
-		Y: v1.Y - v2.Y,
-	}
-}
-
-// MultVectors is a port of the p5.js `p5.Vector.mult()` function.
-// It returns a new Vector that is the result of multiplying v by n.
-// This does not modify the original Vector.
-func MultVectors(v *Vector, n float32) *Vector {
-	return &Vector{
-		X: v.X * n,
-		Y: v.Y * n,
-	}
-}
-
-// NormalizeVector is a port of the p5.js `p5.Vector.normalize()` function.
-// It returns a new unit Vector (length of 1) version of v.
-// This does not modify the original Vector.
-func NormalizeVector(v *Vector) *Vector {
-	m := v.Mag()
-	if m > 0 {
-		return &Vector{
-			X: v.X / m,
-			Y: v.Y / m,
-		}
-	}
-	return &Vector{X: 0, Y: 0}
 }
