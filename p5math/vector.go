@@ -86,6 +86,13 @@ func (v *Vector) Mag() float32 {
 	return float32(math.Sqrt(float64(v.X*v.X + v.Y*v.Y)))
 }
 
+// SetMag is a port of the p5.js `vector.setMag()` function.
+// It sets the magnitude of the Vector to the given value and modifies the original Vector.
+func (v *Vector) SetMag(n float32) {
+	v.Normalize()
+	v.Mult(n)
+}
+
 // Normalize is a port of the p5.js `vector.normalize()` function.
 // It normalizes the Vector to a unit Vector (length of 1) and modifies the original Vector.
 func (v *Vector) Normalize() {
